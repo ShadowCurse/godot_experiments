@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/health_ui.png-8d6c32439e49700bb27881248c3cef70.stex"
+path="res://.import/health_ui_blank.png-550540dde4099a7410a51e08bba3c46f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://dungeon_crawler_16x16_pixel_pack/ui (new)/health_ui.png"
-dest_files=[ "res://.import/health_ui.png-8d6c32439e49700bb27881248c3cef70.stex" ]
+source_file="res://dungeon_crawler_16x16_pixel_pack/ui (new)/health_ui_blank.png"
+dest_files=[ "res://.import/health_ui_blank.png-550540dde4099a7410a51e08bba3c46f.stex" ]
 
 [params]
 
