@@ -1,19 +1,27 @@
 extends KinematicBody2D
 
 export var speed = 169
+export var max_health = 69
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var surrounding_items = []
+var surr_item_selected = 0;
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	$AnimatedSprite.play()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	move(delta)
+	pickup()
+
+func _on_Pickup_body_entered(body):
+	surrounding_items.append(body)
+	print_debug(surrounding_items)
+
+func _on_Pickup_body_exited(body):
+	surrounding_items.remove(surrounding_items.find(body))
+	print_debug(surrounding_items)
+	
+func move(delta):
 	var velocity = Vector2.ZERO
 	if Input.is_action_pressed("right"):
 		velocity.x += 1
@@ -34,6 +42,9 @@ func _process(delta):
 		$AnimatedSprite.flip_h = true
 	else:
 		$AnimatedSprite.flip_h = false
-		
-	#position += velocity * delta
+	
 	move_and_slide(velocity * speed * delta)
+	
+func pickup():
+	if Input.is_action_pressed("pickup"):
+		get_node(surrounding_items[surr_item_selected]).free()
