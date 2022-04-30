@@ -70,15 +70,12 @@ radius = 4.4
 height = 4.8
 
 [node name="Player" type="KinematicBody2D"]
-scale = Vector2( 5, 5 )
 script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 5, 5 )
 frames = SubResource( 1 )
 animation = "run"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.4, 0 )
-scale = Vector2( 5, 5 )
 shape = SubResource( 14 )
