@@ -131,6 +131,14 @@ points = PoolVector2Array( 0, 8, 16, 8, 16, 16, 0, 16 )
 [node name="MainScene" type="Node2D"]
 scale = Vector2( 4, 4 )
 
+[node name="UI" parent="." instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 2.0
+margin_top = 148.0
+margin_right = 2.0
+margin_bottom = 148.0
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 93, 68 )
 z_index = 1
@@ -154,10 +162,4 @@ tile_data = PoolIntArray( 2, 0, 65540, 4, 0, 2, 5, 0, 2, 7, 0, 65540, 65545, 0, 
 [node name="Pickup" parent="." instance=ExtResource( 3 )]
 position = Vector2( 183, 77 )
 
-[node name="UI" parent="." instance=ExtResource( 4 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 2.0
-margin_top = 148.0
-margin_right = 2.0
-margin_bottom = 148.0
+[connection signal="health_change" from="Player" to="UI" method="_on_Player_health_change"]

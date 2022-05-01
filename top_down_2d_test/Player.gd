@@ -1,25 +1,19 @@
 extends KinematicBody2D
 
-export var speed = 169
-export var max_health = 69
+signal health_change(new_hp)
 
-var surrounding_items = []
-var surr_item_selected = 0;
+export var speed = 100
+export var max_health = 100
+
+var hp = max_health
 
 func _ready():
+	emit_signal("health_change", hp)
 	$AnimatedSprite.play()
 
 func _process(delta):
 	move(delta)
-	pickup()
-
-func _on_Pickup_body_entered(body):
-	surrounding_items.append(body)
-	print_debug(surrounding_items)
-
-func _on_Pickup_body_exited(body):
-	surrounding_items.remove(surrounding_items.find(body))
-	print_debug(surrounding_items)
+	take_damage(5)
 	
 func move(delta):
 	var velocity = Vector2.ZERO
@@ -45,6 +39,9 @@ func move(delta):
 	
 	move_and_slide(velocity * speed * delta)
 	
-func pickup():
+func take_damage(damage):
+	# for testing purpuse
 	if Input.is_action_pressed("pickup"):
-		get_node(surrounding_items[surr_item_selected]).free()
+		hp -= damage
+		print("Hp left: ", hp)
+		emit_signal("health_change", hp)
