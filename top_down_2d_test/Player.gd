@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 signal health_change(new_hp)
 
-export var speed = 100
+export var speed = 150
 export var max_health = 100
 
 var hp = max_health
