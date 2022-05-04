@@ -4,6 +4,9 @@ signal health_change(new_hp)
 
 export var speed = 150
 export var max_health = 100
+export var friction = 0.5
+
+var velocity = Vector2.ZERO
 
 var hp = max_health
 
@@ -12,32 +15,39 @@ func _ready():
 	$AnimatedSprite.play()
 
 func _process(delta):
-	move(delta)
+	animation()
 	take_damage(5)
 	
-func move(delta):
-	var velocity = Vector2.ZERO
+func _physics_process(delta):
+	var direction = Vector2.ZERO
 	if Input.is_action_pressed("right"):
-		velocity.x += 1
+		direction.x += 1
 	if Input.is_action_pressed("left"):
-		velocity.x -= 1
+		direction.x -= 1
 	if Input.is_action_pressed("down"):
-		velocity.y += 1
+		direction.y += 1
 	if Input.is_action_pressed("up"):
-		velocity.y -= 1
-
-	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed
+		direction.y -= 1
+	
+	direction.normalized()
+	velocity += direction * speed;
+	
+	velocity = move_and_slide(velocity)
+	velocity = lerp(velocity, Vector2.ZERO, friction)
+	
+func animation():
+	if velocity.length() > 0.1:
 		$AnimatedSprite.animation = "run"
 	else:
 		$AnimatedSprite.animation = "idle"
 	
-	if velocity.x < 0:
+	var mouse_dir = (get_global_mouse_position() - global_position).normalized()
+	if mouse_dir.x < 0:
 		$AnimatedSprite.flip_h = true
+		$Sword.scale.x = -1.0
 	else:
 		$AnimatedSprite.flip_h = false
-	
-	move_and_slide(velocity * speed * delta)
+		$Sword.scale.x = 1.0
 	
 func take_damage(damage):
 	# for testing purpuse
