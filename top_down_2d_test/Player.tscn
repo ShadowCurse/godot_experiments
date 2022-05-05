@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://dungeon_crawler_16x16_pixel_pack/heroes/knight/knight_idle_spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://dungeon_crawler_16x16_pixel_pack/heroes/knight/knight_run_spritesheet.png" type="Texture" id=2]
@@ -70,6 +70,62 @@ animations = [ {
 radius = 4.4
 height = 4.8
 
+[sub_resource type="Animation" id=15]
+resource_name = "Attack"
+length = 0.6
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.08, 0.14, 0.2, 0.26, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -5, -2 ), Vector2( -4.76837e-07, -6 ), Vector2( 4, -5 ), Vector2( 6, 4.76837e-07 ), Vector2( 5, 4 ), Vector2( -5, -2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.08, 0.15, 0.22, 0.27, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -77.8999, -45.0, -13.6, 36.9, 85.2, -77.8999 ]
+}
+
+[sub_resource type="Animation" id=16]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -5, -2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -77.8999 ]
+}
+
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 3 )
 
@@ -88,3 +144,7 @@ position = Vector2( -5, -2 )
 rotation = -1.35961
 scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 4 )
+
+[node name="SwordAnimationPlayer" type="AnimationPlayer" parent="Sword"]
+anims/Attack = SubResource( 15 )
+anims/RESET = SubResource( 16 )
