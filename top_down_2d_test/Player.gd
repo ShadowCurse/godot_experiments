@@ -6,14 +6,9 @@ export var speed = 150
 export var max_health = 100
 export var friction = 0.5
 
-enum Orientation {
-	Left,
-	Right
-}
-
 var velocity = Vector2.ZERO
 var hp = max_health
-var orientation = Orientation.Right
+var mouse_dir = Vector2.ZERO
 var is_attacking = false
 
 func _ready():
@@ -21,11 +16,7 @@ func _ready():
 	$AnimatedSprite.play()
 
 func _process(delta):
-	var mouse_dir = (get_global_mouse_position() - global_position).normalized()
-	if mouse_dir.x < 0:
-		orientation = Orientation.Left
-	else:
-		orientation = Orientation.Right
+	mouse_dir = (get_global_mouse_position() - global_position).normalized()
 		
 	attack()
 	animation()
@@ -54,12 +45,14 @@ func animation():
 	else:
 		$AnimatedSprite.animation = "idle"
 	
-	if orientation == Orientation.Left:
+	if mouse_dir.x < 0:
 		$AnimatedSprite.flip_h = true
 		$Sword.scale.x = -1.0
+		$Sword.rotation = -mouse_dir.angle_to(Vector2.LEFT)
 	else:
 		$AnimatedSprite.flip_h = false
 		$Sword.scale.x = 1.0
+		$Sword.rotation = -mouse_dir.angle_to(Vector2.RIGHT)
 		
 	if is_attacking:
 		$Sword/SwordAnimationPlayer.play("Attack")
