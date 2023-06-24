@@ -1,19 +1,18 @@
 extends Node
 
-export (PackedScene) var mob_scene
+@export var mob_scene: PackedScene
 
 func _ready():
 	randomize()
 	$UI/Retry.hide()
 
 func _on_MobTimer_timeout():
-	var mob = mob_scene.instance()
-	var mob_spawn_location = $SpawnPath/SpawnLocation
-	mob_spawn_location.unit_offset = randf()
-	var player_position = $Player.transform.origin
+	var mob = mob_scene.instantiate()
+	$SpawnPath/SpawnLocation.progress_ratio = randf()
+	var player_position = $Player.position
 	add_child(mob)
-	mob.initialize(mob_spawn_location.translation, player_position)
-	mob.connect("squashed", $UI/ScoreLabel, "_on_Mob_squashed")
+	mob.initialize($SpawnPath/SpawnLocation.position, player_position)
+	mob.connect("squashed", Callable($UI/ScoreLabel, "_on_Mob_squashed"))
 
 
 func _on_Player_hit():
