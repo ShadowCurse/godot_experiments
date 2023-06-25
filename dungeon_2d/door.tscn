@@ -1,0 +1,106 @@
+[gd_scene load_steps=20 format=3 uid="uid://b0vi0lobnppa3"]
+
+[ext_resource type="Script" path="res://door.gd" id="1_8d8jx"]
+[ext_resource type="Texture2D" uid="uid://gaeivq3uuamf" path="res://dungeon_crawler_16x16_pixel_pack/tiles/wall/door_anim_opening_f0.png" id="1_in8kb"]
+[ext_resource type="Texture2D" uid="uid://cli6n7ftl5cwe" path="res://dungeon_crawler_16x16_pixel_pack/tiles/wall/door_anim_opening_f1.png" id="2_16ixy"]
+[ext_resource type="Texture2D" uid="uid://ctcfxpabhbsm8" path="res://dungeon_crawler_16x16_pixel_pack/tiles/wall/door_fullyopen.png" id="2_uac40"]
+[ext_resource type="Texture2D" uid="uid://dm333x8rxhohu" path="res://dungeon_crawler_16x16_pixel_pack/tiles/wall/door_anim_opening_f2.png" id="3_gxqgx"]
+[ext_resource type="Texture2D" uid="uid://ur0jq808w5be" path="res://dungeon_crawler_16x16_pixel_pack/tiles/wall/door_anim_opening_f3.png" id="4_u8s5x"]
+[ext_resource type="Texture2D" uid="uid://vt5yi26bn43f" path="res://dungeon_crawler_16x16_pixel_pack/tiles/wall/door_anim_opening_f4.png" id="5_u876y"]
+[ext_resource type="Texture2D" uid="uid://cfslceycorgtm" path="res://dungeon_crawler_16x16_pixel_pack/tiles/wall/door_anim_opening_f5.png" id="6_fdvjb"]
+[ext_resource type="Texture2D" uid="uid://cfmvnbl7dqb12" path="res://dungeon_crawler_16x16_pixel_pack/tiles/wall/door_anim_opening_f6.png" id="7_wsqc1"]
+[ext_resource type="Texture2D" uid="uid://bb884gxihci4w" path="res://dungeon_crawler_16x16_pixel_pack/tiles/wall/door_anim_opening_f7.png" id="8_srhmm"]
+[ext_resource type="Texture2D" uid="uid://bmukrr14h0agh" path="res://dungeon_crawler_16x16_pixel_pack/tiles/wall/door_anim_opening_f8.png" id="9_i3t60"]
+[ext_resource type="Texture2D" uid="uid://bxmtsiqrj20do" path="res://dungeon_crawler_16x16_pixel_pack/tiles/wall/door_anim_opening_f9.png" id="10_fjxga"]
+[ext_resource type="Texture2D" uid="uid://bpjf61sjg1cda" path="res://dungeon_crawler_16x16_pixel_pack/tiles/wall/door_anim_opening_f10.png" id="11_p7osc"]
+[ext_resource type="Texture2D" uid="uid://5xsmrpbo8ojy" path="res://dungeon_crawler_16x16_pixel_pack/tiles/wall/door_anim_opening_f11.png" id="12_y3my8"]
+[ext_resource type="Texture2D" uid="uid://f1ejba1kjtw0" path="res://dungeon_crawler_16x16_pixel_pack/tiles/wall/door_anim_opening_f12.png" id="13_157ex"]
+[ext_resource type="Texture2D" uid="uid://bobqbl12t4ogt" path="res://dungeon_crawler_16x16_pixel_pack/tiles/wall/door_anim_opening_f13.png" id="14_0k7g3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q0tlf"]
+size = Vector2(20, 7.33333)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ish36"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_uac40")
+}],
+"loop": true,
+"name": &"open",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_in8kb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_16ixy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_gxqgx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_u8s5x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_u876y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_fdvjb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_wsqc1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_srhmm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_i3t60")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_fjxga")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_p7osc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_y3my8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_157ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_0k7g3")
+}],
+"loop": false,
+"name": &"openning",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h8lat"]
+size = Vector2(30, 9.5)
+
+[node name="Door" type="Area2D"]
+collision_mask = 8
+script = ExtResource("1_8d8jx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 21.5)
+scale = Vector2(1.5, 1.5)
+shape = SubResource("RectangleShape2D_q0tlf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_ish36")
+animation = &"openning"
+
+[node name="DoorCollider" type="StaticBody2D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorCollider"]
+position = Vector2(0, -11)
+shape = SubResource("RectangleShape2D_h8lat")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
