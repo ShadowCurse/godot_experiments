@@ -12,10 +12,7 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if (body.have_key()):
-		print("openning...")
 		self.start_openning()
-	else:
-		print("no key")
 
 func start_openning() -> void:
 	$AnimatedSprite2D.play()

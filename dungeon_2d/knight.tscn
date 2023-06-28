@@ -121,3 +121,5 @@ shape = SubResource("CapsuleShape2D_regcw")
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_cor6p")
 animation = &"idle"
+
+[node name="Camera2D" type="Camera2D" parent="."]

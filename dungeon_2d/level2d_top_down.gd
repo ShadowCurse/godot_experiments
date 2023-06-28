@@ -6,6 +6,7 @@ signal next_scene_signal(scene: String)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$knight.controls_type = $knight.Controls.TopDown
+	$knight.setup_camera($TileMap.get_used_rect(), $TileMap.tile_set.tile_size, $TileMap.scale)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

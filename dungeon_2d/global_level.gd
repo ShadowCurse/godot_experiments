@@ -24,7 +24,7 @@ func _on_level_next_scene(next_scene_name: String) -> void:
 func prepare_next_scene(scene_name: String):
 	var scene_path = "res://" + scene_name + ".tscn"
 	current_scene_node = load(scene_path).instantiate()
-	add_child(current_scene_node)
+	call_deferred("add_child", current_scene_node)
 	current_scene_node.next_scene_signal.connect(_on_level_next_scene)
 
 

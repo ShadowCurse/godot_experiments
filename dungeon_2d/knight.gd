@@ -15,6 +15,12 @@ enum Controls {
 
 var controls_type: Controls = Controls.TopDown
 
+func setup_camera(map_limits: Rect2i, map_cellsize: Vector2, map_scale: Vector2):
+	$Camera2D.limit_left = map_limits.position.x * map_cellsize.x * map_scale.x
+	$Camera2D.limit_right = map_limits.end.x * map_cellsize.x * map_scale.x
+	$Camera2D.limit_top = map_limits.position.y * map_cellsize.y * map_scale.y
+	$Camera2D.limit_bottom = map_limits.end.y * map_cellsize.y * map_scale.y
+
 func _physics_process(delta: float) -> void:
 	match controls_type:
 		Controls.TopDown:
