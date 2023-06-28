@@ -1,5 +1,7 @@
 extends Area2D
 
+signal opened
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -22,3 +24,4 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	$AnimatedSprite2D.stop()
 	$AnimatedSprite2D.animation = "open"
 	$DoorCollider/CollisionShape2D.set_deferred("disabled", true)
+	opened.emit()
