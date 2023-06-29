@@ -1,11 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://b6m3k67iskqld"]
+[gd_scene load_steps=12 format=3 uid="uid://b6m3k67iskqld"]
 
 [ext_resource type="Script" path="res://level2d_top_down.gd" id="1_d83qq"]
 [ext_resource type="TileSet" uid="uid://buk5iukosth8u" path="res://level.tres" id="1_hc3l3"]
 [ext_resource type="PackedScene" uid="uid://dvwjhmlwnvfnh" path="res://knight.tscn" id="2_4ei7h"]
 [ext_resource type="PackedScene" uid="uid://dbworsv6nlwo6" path="res://key.tscn" id="3_vxpv5"]
+[ext_resource type="PackedScene" uid="uid://ba80fb1marvp5" path="res://sword.tscn" id="4_hvkn4"]
 [ext_resource type="PackedScene" uid="uid://b0vi0lobnppa3" path="res://door.tscn" id="4_jwca8"]
 [ext_resource type="PackedScene" uid="uid://cadus25wp11qo" path="res://slime.tscn" id="6_cv2j1"]
+[ext_resource type="PackedScene" uid="uid://c0clhp666klv2" path="res://cursor.tscn" id="7_5b2xx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kcdvi"]
 size = Vector2(61.5, 20)
@@ -41,9 +43,11 @@ layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array(131075, 327680, 1, 327683, 0, 1, 327684, 65536, 1, 1, 262144, 1)
 
-[node name="knight" parent="." instance=ExtResource("2_4ei7h")]
+[node name="knight" parent="." node_paths=PackedStringArray("cursor") instance=ExtResource("2_4ei7h")]
 position = Vector2(399, 302)
 scale = Vector2(2, 2)
+cursor = NodePath("../cursor")
+weapon = ExtResource("4_hvkn4")
 
 [node name="Key" parent="." instance=ExtResource("3_vxpv5")]
 position = Vector2(387, 129)
@@ -87,6 +91,8 @@ curve = SubResource("Curve2D_h1uhj")
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D2"]
 position = Vector2(1366, 95)
 rotation = 2.75327
+
+[node name="cursor" parent="." instance=ExtResource("7_5b2xx")]
 
 [connection signal="opened" from="Door" to="." method="_on_door_opened"]
 [connection signal="body_entered" from="scene_change" to="." method="_on_scene_change_body_entered"]

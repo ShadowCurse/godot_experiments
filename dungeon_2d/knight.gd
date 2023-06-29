@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+@export var cursor: Node2D
+@export var weapon: PackedScene
+
 const SPEED = 300.0
 const JUMP = -444.0
 
@@ -21,13 +24,21 @@ func setup_camera(map_limits: Rect2i, map_cellsize: Vector2, map_scale: Vector2)
 	$Camera2D.limit_top = map_limits.position.y * map_cellsize.y * map_scale.y
 	$Camera2D.limit_bottom = map_limits.end.y * map_cellsize.y * map_scale.y
 
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("attack"):
+		var direction = cursor.position - self.position
+		var w = weapon.instantiate()
+		self.add_child(w)
+		w.position = direction.normalized() * 5.0
+		w.scale = Vector2(3.0, 3.0)
+		w.rotation = direction.angle()
+
 func _physics_process(delta: float) -> void:
 	match controls_type:
 		Controls.TopDown:
 			physics_process_top_down(delta)
 		Controls.SideScroll:
 			physics_process_side_scroll(delta)
-			
 	
 func physics_process_top_down(delta: float) -> void:
 	var direction := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")

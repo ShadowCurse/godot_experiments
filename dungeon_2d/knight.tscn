@@ -105,7 +105,7 @@ animations = [{
 }]
 
 [node name="knight" type="CharacterBody2D"]
-z_index = 1
+z_index = 2
 texture_filter = 1
 position = Vector2(0, 2)
 scale = Vector2(3, 3)

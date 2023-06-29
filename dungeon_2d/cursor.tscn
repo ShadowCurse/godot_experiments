@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0clhp666klv2"]
+
+[ext_resource type="Script" path="res://cursor.gd" id="1_j0x44"]
+[ext_resource type="Texture2D" uid="uid://dofydn7nblh26" path="res://dungeon_crawler_16x16_pixel_pack/ui (new)/crosshair_1.png" id="2_s2ki4"]
+
+[node name="cursor" type="Node2D"]
+script = ExtResource("1_j0x44")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 2
+texture_filter = 1
+texture = ExtResource("2_s2ki4")
