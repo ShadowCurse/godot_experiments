@@ -6,6 +6,7 @@ signal next_scene_signal(scene: String)
 func _ready() -> void:
 	$knight.controls_type = $knight.Controls.TopDown
 	$knight.setup_camera($TileMap.get_used_rect(), $TileMap.tile_set.tile_size, $TileMap.scale)
+	$knight.setup_weapons()
 
 func _process(delta: float) -> void:
 	pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b6m3k67iskqld"]
+[gd_scene load_steps=13 format=3 uid="uid://b6m3k67iskqld"]
 
 [ext_resource type="Script" path="res://levels/level2d_top_down.gd" id="1_7ed80"]
 [ext_resource type="TileSet" uid="uid://buk5iukosth8u" path="res://levels/level.tres" id="2_a44fo"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b0vi0lobnppa3" path="res://door.tscn" id="6_njuia"]
 [ext_resource type="PackedScene" uid="uid://cadus25wp11qo" path="res://enemies/slime.tscn" id="7_hlvya"]
 [ext_resource type="PackedScene" uid="uid://c0clhp666klv2" path="res://cursor.tscn" id="8_v33te"]
+[ext_resource type="PackedScene" uid="uid://137earpccrqu" path="res://crossbow_pickup.tscn" id="9_cgla0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kcdvi"]
 size = Vector2(61.5, 20)
@@ -47,7 +48,7 @@ layer_1/tile_data = PackedInt32Array(131075, 327680, 1, 327683, 0, 1, 327684, 65
 position = Vector2(399, 302)
 scale = Vector2(2, 2)
 cursor = NodePath("../cursor")
-weapon = ExtResource("4_5pgds")
+starting_weapon = ExtResource("4_5pgds")
 
 [node name="Key" parent="." instance=ExtResource("5_wlt1r")]
 position = Vector2(387, 129)
@@ -93,6 +94,10 @@ position = Vector2(1366, 95)
 rotation = 2.75327
 
 [node name="cursor" parent="." instance=ExtResource("8_v33te")]
+
+[node name="crossbow_pickup" parent="." instance=ExtResource("9_cgla0")]
+position = Vector2(480, 449)
+scale = Vector2(3, 3)
 
 [connection signal="opened" from="Door" to="." method="_on_door_opened"]
 [connection signal="body_entered" from="scene_change" to="." method="_on_scene_change_body_entered"]

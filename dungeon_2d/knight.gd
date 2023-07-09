@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var cursor: Node2D
-@export var weapon: PackedScene
+@export var starting_weapon: PackedScene
 
 const SPEED = 300.0
 const JUMP = -444.0
@@ -18,27 +18,40 @@ enum Controls {
 
 var controls_type: Controls = Controls.TopDown
 
-func setup_camera(map_limits: Rect2i, map_cellsize: Vector2, map_scale: Vector2):
+var weapons: Array = []
+var current_weapon: int = 0
+
+func setup_camera(map_limits: Rect2i, map_cellsize: Vector2, map_scale: Vector2) -> void:
 	$Camera2D.limit_left = map_limits.position.x * map_cellsize.x * map_scale.x
 	$Camera2D.limit_right = map_limits.end.x * map_cellsize.x * map_scale.x
 	$Camera2D.limit_top = map_limits.position.y * map_cellsize.y * map_scale.y
 	$Camera2D.limit_bottom = map_limits.end.y * map_cellsize.y * map_scale.y
 
+func setup_weapons() -> void:
+	var w = starting_weapon.instantiate()
+	self.weapons.append(w)
+	self.current_weapon = 0;
+	self.add_child(w)
+
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("attack"):
-		var direction = cursor.position - self.position
-		var w = weapon.instantiate()
-		self.add_child(w)
-		w.position = direction.normalized() * 5.0
-		w.scale = Vector2(3.0, 3.0)
-		w.rotation = direction.angle()
+	if Input.is_action_pressed("attack"):
+		self.weapons[self.current_weapon].attack(self.position, self.cursor.position)
+	if Input.is_action_just_pressed("weapon1"):
+		self.switch_weapons(0)
+	if Input.is_action_just_pressed("weapon2"):
+		self.switch_weapons(1)
+
+func switch_weapons(weapon_slot: int) -> void:
+	if self.weapons.size() <= weapon_slot:
+		return
+	self.current_weapon = weapon_slot;
 
 func _physics_process(delta: float) -> void:
 	match controls_type:
 		Controls.TopDown:
-			physics_process_top_down(delta)
+			self.physics_process_top_down(delta)
 		Controls.SideScroll:
-			physics_process_side_scroll(delta)
+			self.physics_process_side_scroll(delta)
 	
 func physics_process_top_down(delta: float) -> void:
 	var direction := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
@@ -58,7 +71,7 @@ func physics_process_top_down(delta: float) -> void:
 		
 	if self.velocity.x != 0:
 		$AnimatedSprite2D.flip_h = self.velocity.x < 0
-	move_and_slide()
+	self.move_and_slide()
 	
 func physics_process_side_scroll(delta: float) -> void:
 	velocity.y += gravity * delta
@@ -87,8 +100,12 @@ func physics_process_side_scroll(delta: float) -> void:
 func have_key() -> bool:
 	return self.has_key
 
-func pickup_key(node: Node2D) -> void:
+func pickup_key() -> void:
 	print("picking up a key")
 	self.has_key = true
-	node.queue_free()
 	pass
+
+func pickup_weapon(weapon: PackedScene) -> void:
+	var w = weapon.instantiate()
+	self.weapons.append(w)
+	self.add_child(w)
