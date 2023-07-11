@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://d3l1vx85qm6qt"]
+
+[ext_resource type="Texture2D" uid="uid://xkot3t3ir6ke" path="res://dungeon_crawler_16x16_pixel_pack/enemies/flying creature/fly_anim_spritesheet.png" id="1_lgdug"]
+[ext_resource type="Script" path="res://enemies/flying_eye.gd" id="1_w213k"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8lp50"]
+radius = 5.09902
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eo2id"]
+atlas = ExtResource("1_lgdug")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tier8"]
+atlas = ExtResource("1_lgdug")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l0kjy"]
+atlas = ExtResource("1_lgdug")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ty0s6"]
+atlas = ExtResource("1_lgdug")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8u00x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eo2id")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tier8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l0kjy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ty0s6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="flying_eye" type="CharacterBody2D"]
+script = ExtResource("1_w213k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8lp50")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_8u00x")
+frame = 3
+frame_progress = 0.5111

@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://dvwjhmlwnvfnh"]
+[gd_scene load_steps=19 format=3 uid="uid://dvwjhmlwnvfnh"]
 
 [ext_resource type="Texture2D" uid="uid://b61l3tuhx5iqs" path="res://dungeon_crawler_16x16_pixel_pack/heroes/knight/knight_idle_spritesheet.png" id="1_qi0wp"]
 [ext_resource type="Script" path="res://knight.gd" id="1_u6xag"]
 [ext_resource type="Texture2D" uid="uid://po68dy6enrky" path="res://dungeon_crawler_16x16_pixel_pack/heroes/knight/knight_run_spritesheet.png" id="2_qvrw0"]
+[ext_resource type="PackedScene" uid="uid://c2x6i5yb01i5" path="res://ui.tscn" id="4_fpyco"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_regcw"]
 radius = 8.0
@@ -123,3 +124,14 @@ sprite_frames = SubResource("SpriteFrames_cor6p")
 animation = &"idle"
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="CanvasLayer" instance=ExtResource("4_fpyco")]
+anchors_preset = 15
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
