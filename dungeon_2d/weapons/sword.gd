@@ -19,6 +19,7 @@ func _on_body_exited(body: Node2D) -> void:
 		effect.emitting = true
 
 func attack(player_pos: Vector2, cursor_pos: Vector2) -> void:
+	self.visible = true
 	var direction = cursor_pos - player_pos
 	self.position = direction.normalized() * 5.0
 	self.rotation = direction.angle()

@@ -32,19 +32,23 @@ func setup_weapons() -> void:
 	self.weapons.append(w)
 	self.current_weapon = 0;
 	self.add_child(w)
+	$CanvasLayer/UI.select_sword()
 
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("attack"):
 		self.weapons[self.current_weapon].attack(self.position, self.cursor.position)
 	if Input.is_action_just_pressed("weapon1"):
-		self.switch_weapons(0)
+		if self.switch_weapons(0):
+			$CanvasLayer/UI.select_sword()
 	if Input.is_action_just_pressed("weapon2"):
-		self.switch_weapons(1)
+		if self.switch_weapons(1):
+			$CanvasLayer/UI.select_crossbow()
 
-func switch_weapons(weapon_slot: int) -> void:
+func switch_weapons(weapon_slot: int) -> bool:
 	if self.weapons.size() <= weapon_slot:
-		return
+		return false
 	self.current_weapon = weapon_slot;
+	return true
 
 func _physics_process(delta: float) -> void:
 	match controls_type:
@@ -109,3 +113,4 @@ func pickup_weapon(weapon: PackedScene) -> void:
 	var w = weapon.instantiate()
 	self.weapons.append(w)
 	self.add_child(w)
+	$CanvasLayer/UI.add_crossbow()
