@@ -1,0 +1,118 @@
+[gd_scene load_steps=6 format=3 uid="uid://chqg45ywn4bn8"]
+
+[ext_resource type="Script" path="res://main_menu.gd" id="1_31qtd"]
+[ext_resource type="PackedScene" uid="uid://coisyo3ahrpw1" path="res://levels/global_level.tscn" id="2_8w57v"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_00vne"]
+bg_color = Color(0.00784314, 0.168627, 0.113725, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jkm0x"]
+bg_color = Color(0.00784314, 0.168627, 0.113725, 0.392157)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8gq6q"]
+bg_color = Color(0.0432472, 0.411502, 0.296775, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="main_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_31qtd")
+start_scene = ExtResource("2_8w57v")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.192157, 0.192157, 0.192157, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 70
+theme_override_constants/margin_right = 70
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 40
+text = "Dungeon 2d"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 10
+
+[node name="start" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer3"]
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_00vne")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jkm0x")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8gq6q")
+text = "Start"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_right = 100
+
+[node name="fullscreen" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+focus_mode = 0
+text = "Fullscreen"
+
+[node name="MarginContainer4" type="MarginContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_right = 100
+
+[node name="windowed" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer4"]
+layout_mode = 2
+focus_mode = 0
+text = "Windowed"
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_right = 100
+
+[node name="exit" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+focus_mode = 0
+text = "Exit"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer3/start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/fullscreen" to="." method="_on_fullscreen_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer4/windowed" to="." method="_on_windowed_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2/exit" to="." method="_on_exit_pressed"]
