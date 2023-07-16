@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://c36sy5qfje8sn"]
+
+[ext_resource type="Texture2D" uid="uid://cbvglaoxp4d0y" path="res://tilemap.png" id="1_73lvw"]
+[ext_resource type="Script" path="res://mech_leg.gd" id="1_pvuut"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8r5p"]
+atlas = ExtResource("1_73lvw")
+region = Rect2(16, 48, 16, 16)
+
+[node name="mech_leg" type="Node2D"]
+script = ExtResource("1_pvuut")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("AtlasTexture_h8r5p")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, 0)
+width = 1.0

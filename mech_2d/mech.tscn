@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://bgaejt0dhm60t"]
+
+[ext_resource type="Script" path="res://mech.gd" id="1_idjpn"]
+[ext_resource type="Texture2D" uid="uid://cbvglaoxp4d0y" path="res://tilemap.png" id="2_n7by4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wg8ra"]
+radius = 15.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27hep"]
+atlas = ExtResource("2_n7by4")
+region = Rect2(0, 48, 15, 16)
+
+[node name="mech" type="CharacterBody2D"]
+script = ExtResource("1_idjpn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wg8ra")
+
+[node name="mech_sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+rotation = 1.5708
+texture = SubResource("AtlasTexture_27hep")
+
+[node name="leg_1_anchor" type="Node2D" parent="."]
+position = Vector2(3, 3)
+
+[node name="leg_2_anchor" type="Node2D" parent="."]
+position = Vector2(-3, 3)
+rotation = 1.5708
+
+[node name="leg_3_anchor" type="Node2D" parent="."]
+position = Vector2(-3, -3)
+rotation = 1.5708
+
+[node name="leg_4_anchor" type="Node2D" parent="."]
+position = Vector2(3, -3)
+rotation = 1.5708
