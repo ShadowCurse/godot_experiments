@@ -84,22 +84,15 @@ layer_0/tile_data = PackedInt32Array(0, 65537, 1, 65536, 65537, 1, 131072, 65537
 position = Vector2(394, 81)
 scale = Vector2(3, 3)
 
-[node name="br_leg" parent="." node_paths=PackedStringArray("torso") instance=ExtResource("3_512k3")]
+[node name="back_right_leg" parent="." node_paths=PackedStringArray("torso") instance=ExtResource("3_512k3")]
 scale = Vector2(3, 3)
 torso = NodePath("../mech")
-leg_length = 70.0
-max_angle = 90.0
-min_angle = 180.0
-
-[node name="bl_leg" parent="." node_paths=PackedStringArray("torso") instance=ExtResource("3_512k3")]
-scale = Vector2(3, 3)
-torso = NodePath("../mech")
-leg_side = 1
+leg_side = 2
 leg_length = 70.0
 max_angle = 180.0
 min_angle = 90.0
 
-[node name="tl_leg" parent="." node_paths=PackedStringArray("torso") instance=ExtResource("3_512k3")]
+[node name="back_left_leg" parent="." node_paths=PackedStringArray("torso") instance=ExtResource("3_512k3")]
 scale = Vector2(3, 3)
 torso = NodePath("../mech")
 leg_side = 3
@@ -107,9 +100,15 @@ leg_length = 70.0
 max_angle = -90.0
 min_angle = -180.0
 
-[node name="tr_leg" parent="." node_paths=PackedStringArray("torso") instance=ExtResource("3_512k3")]
+[node name="fron_right_leg" parent="." node_paths=PackedStringArray("torso") instance=ExtResource("3_512k3")]
 scale = Vector2(3, 3)
 torso = NodePath("../mech")
-leg_side = 2
+leg_length = 70.0
+max_angle = 90.0
+
+[node name="front_left_leg" parent="." node_paths=PackedStringArray("torso") instance=ExtResource("3_512k3")]
+scale = Vector2(3, 3)
+torso = NodePath("../mech")
+leg_side = 1
 leg_length = 70.0
 min_angle = -90.0
