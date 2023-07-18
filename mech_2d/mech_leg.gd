@@ -17,7 +17,10 @@ enum LegSide {
 var current_position: Vector2
 var new_position: Vector2
 var position_transition: float = 0.0
-var position_transition_speed: float = 20.0
+@export var position_transition_speed: float = 20.0
+var reset_time: float = 0.2
+
+var last_torso_transform: Transform2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -28,24 +31,30 @@ func _process(delta: float) -> void:
 	var direction = anchor_to_leg_vector()
 	var distance = direction.length()
 	var leg_angle = torso_forward().angle_to(direction)
-	print("side: ", self.leg_side, " angle: ", rad_to_deg(leg_angle))
+#	print("side: ", self.leg_side, " angle: ", rad_to_deg(leg_angle))
 	
 	if self.position_transition <= 1.0:
 		self.move_to_new_position(delta)
 	
 	self.rotation = -1.5 * PI + direction.angle() 
 	
+	if self.last_torso_transform != self.torso.get_transform():
+		$reset_timer.start(self.reset_time)
+		self.last_torso_transform = self.torso.get_transform()
+		
+	
+	
 	if self.leg_length < distance:
 		self.move_leg()
-		print("distance: ", distance)
+#		print("distance: ", distance)
 	if leg_angle < deg_to_rad(min_angle) || deg_to_rad(max_angle) < leg_angle:
-		print("angle...........")
+#		print("angle...........")
 		self.move_leg()
 		
 	var torso_pos_in_local = self.to_local(anchor_position())
 	$Line2D.set_point_position(1, torso_pos_in_local)
 	
-	print("torso_forward: ", torso_forward())
+#	print("torso_forward: ", torso_forward())
 #	$Line2D.set_point_position(0, self.to_local(self.torso.position))
 #	$Line2D.set_point_position(1, self.to_local(self.torso.position + torso_forward() * 100.0))
 
@@ -102,3 +111,7 @@ func move_to_new_position(delta: float) -> void:
 	self.position_transition += self.position_transition_speed * delta
 	self.position = lerp(self.current_position, self.new_position, self.position_transition)
 	
+
+
+func _on_reset_timer_timeout() -> void:
+	self.move_leg()

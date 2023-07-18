@@ -17,3 +17,8 @@ texture = SubResource("AtlasTexture_h8r5p")
 [node name="Line2D" type="Line2D" parent="."]
 points = PackedVector2Array(0, 0, 0, 0)
 width = 1.0
+
+[node name="reset_timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="reset_timer" to="." method="_on_reset_timer_timeout"]
