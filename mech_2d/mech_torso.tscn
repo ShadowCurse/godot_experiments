@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bi3b56la2yjmh"]
+
+[ext_resource type="Script" path="res://mech_torso.gd" id="1_umhdv"]
+
+[node name="mech_torso" type="Node2D"]
+script = ExtResource("1_umhdv")
+
+[node name="reset_timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="reset_timer" to="." method="_on_reset_timer_timeout"]

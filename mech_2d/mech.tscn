@@ -14,6 +14,7 @@ region = Rect2(0, 48, 15, 16)
 script = ExtResource("1_idjpn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_wg8ra")
 
 [node name="mech_sprite" type="Sprite2D" parent="."]

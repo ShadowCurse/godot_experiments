@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://boh6xfg3hd3v"]
+[gd_scene load_steps=7 format=3 uid="uid://boh6xfg3hd3v"]
 
 [ext_resource type="Texture2D" uid="uid://cbvglaoxp4d0y" path="res://tilemap.png" id="1_imccq"]
 [ext_resource type="PackedScene" uid="uid://bgaejt0dhm60t" path="res://mech.tscn" id="2_fh3ht"]
 [ext_resource type="PackedScene" uid="uid://c36sy5qfje8sn" path="res://mech_leg.tscn" id="3_512k3"]
+[ext_resource type="PackedScene" uid="uid://bi3b56la2yjmh" path="res://mech_torso.tscn" id="3_k0opl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0o36o"]
 texture = ExtResource("1_imccq")
@@ -82,38 +83,44 @@ layer_0/tile_data = PackedInt32Array(0, 65537, 1, 65536, 65537, 1, 131072, 65537
 
 [node name="mech" parent="." instance=ExtResource("2_fh3ht")]
 z_index = 1
-position = Vector2(394, 81)
+position = Vector2(186, 75)
 scale = Vector2(3, 3)
+
+[node name="mech_torso" parent="." node_paths=PackedStringArray("mech") instance=ExtResource("3_k0opl")]
+position = Vector2(276, 84)
+mech = NodePath("../mech")
 
 [node name="back_right_leg" parent="." node_paths=PackedStringArray("torso") instance=ExtResource("3_512k3")]
 position = Vector2(334, 121)
 scale = Vector2(3, 3)
-torso = NodePath("../mech")
+torso = NodePath("../mech_torso")
+leg_id = 3
 leg_side = 2
-leg_length = 70.0
-max_angle = 180.0
-min_angle = 90.0
 
 [node name="back_left_leg" parent="." node_paths=PackedStringArray("torso") instance=ExtResource("3_512k3")]
 position = Vector2(341, 29)
 scale = Vector2(3, 3)
-torso = NodePath("../mech")
+torso = NodePath("../mech_torso")
+leg_id = 2
 leg_side = 3
-leg_length = 70.0
-max_angle = -90.0
-min_angle = -180.0
 
 [node name="fron_right_leg" parent="." node_paths=PackedStringArray("torso") instance=ExtResource("3_512k3")]
 position = Vector2(457, 116)
 scale = Vector2(3, 3)
-torso = NodePath("../mech")
-leg_length = 70.0
-max_angle = 90.0
+torso = NodePath("../mech_torso")
 
 [node name="front_left_leg" parent="." node_paths=PackedStringArray("torso") instance=ExtResource("3_512k3")]
 position = Vector2(435, 24)
 scale = Vector2(3, 3)
-torso = NodePath("../mech")
+torso = NodePath("../mech_torso")
+leg_id = 1
 leg_side = 1
-leg_length = 70.0
-min_angle = -90.0
+
+[connection signal="move" from="mech_torso" to="back_right_leg" method="_on_move_signal"]
+[connection signal="move" from="mech_torso" to="back_left_leg" method="_on_move_signal"]
+[connection signal="move" from="mech_torso" to="fron_right_leg" method="_on_move_signal"]
+[connection signal="move" from="mech_torso" to="front_left_leg" method="_on_move_signal"]
+[connection signal="leg_moved" from="back_right_leg" to="mech_torso" method="on_leg_moved"]
+[connection signal="leg_moved" from="back_left_leg" to="mech_torso" method="on_leg_moved"]
+[connection signal="leg_moved" from="fron_right_leg" to="mech_torso" method="on_leg_moved"]
+[connection signal="leg_moved" from="front_left_leg" to="mech_torso" method="on_leg_moved"]

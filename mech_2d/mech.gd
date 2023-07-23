@@ -13,7 +13,6 @@ func _process(delta: float) -> void:
 	var cursor_pos = get_global_mouse_position()
 	var direction = cursor_pos - self.position
 	self.rotation = direction.angle()
-	pass
 
 func _physics_process(delta: float) -> void:
 	self.physics_process_top_down(delta)
