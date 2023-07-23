@@ -1,10 +1,11 @@
 extends CharacterBody2D
 
-@export var cursor: Node2D
-@export var starting_weapon: PackedScene
-
 const SPEED = 200.0
 const JUMP = -444.0
+
+@export var cursor: Node2D
+@export var starting_weapon: PackedScene
+@export var rotation_speed: float = 5.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -12,7 +13,7 @@ var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _process(delta: float) -> void:
 	var cursor_pos = get_global_mouse_position()
 	var direction = cursor_pos - self.position
-	self.rotation = direction.angle()
+	self.rotation = lerp_angle(self.rotation, direction.angle(), self.rotation_speed * delta)
 
 func _physics_process(delta: float) -> void:
 	self.physics_process_top_down(delta)
