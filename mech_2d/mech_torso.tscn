@@ -6,6 +6,7 @@
 script = ExtResource("1_umhdv")
 
 [node name="reset_timer" type="Timer" parent="."]
+wait_time = 0.15
 one_shot = true
 
 [connection signal="timeout" from="reset_timer" to="." method="_on_reset_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://c36sy5qfje8sn"]
+[gd_scene load_steps=7 format=3 uid="uid://c36sy5qfje8sn"]
 
 [ext_resource type="Texture2D" uid="uid://cbvglaoxp4d0y" path="res://tilemap.png" id="1_73lvw"]
 [ext_resource type="Script" path="res://mech_leg.gd" id="1_pvuut"]
@@ -6,6 +6,42 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_h8r5p"]
 atlas = ExtResource("1_73lvw")
 region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="Animation" id="Animation_yrtvm"]
+resource_name = "move"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(2, 2), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_hokeh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lvd0k"]
+_data = {
+"RESET": SubResource("Animation_hokeh"),
+"move": SubResource("Animation_yrtvm")
+}
 
 [node name="mech_leg" type="Node2D"]
 script = ExtResource("1_pvuut")
@@ -18,7 +54,7 @@ texture = SubResource("AtlasTexture_h8r5p")
 points = PackedVector2Array(0, 0, 0, 0)
 width = 1.0
 
-[node name="reset_timer" type="Timer" parent="."]
-one_shot = true
-
-[connection signal="timeout" from="reset_timer" to="." method="_on_reset_timer_timeout"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lvd0k")
+}
