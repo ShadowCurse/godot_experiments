@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://naqxs5a5oce0"]
+
+[ext_resource type="Shader" path="res://pixelated.gdshader" id="1_7ar5i"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_7ar5i")
