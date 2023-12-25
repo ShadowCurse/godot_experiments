@@ -13,7 +13,7 @@ enum LegSide {
 @export var leg_id: int
 @export var leg_side: LegSide
 
-var leg_length: float = 40.0
+var leg_length: float = 30.0
 var torso_offset: float = 20.0
 var current_position: Vector2
 var new_position: Vector2
@@ -30,7 +30,9 @@ func _process(delta: float) -> void:
 	var direction = anchor_to_leg_vector()
 	var distance = direction.length()
 	var leg_angle = torso_forward().angle_to(direction)
-	self.rotation = -1.5 * PI + direction.angle() 
+	
+	var torso_direction = self.position - self.torso.position
+	self.rotation = -1.5 * PI + torso_direction.angle() 
 	
 	# if transition to new pos is not finished
 	# contine movement
@@ -95,6 +97,5 @@ func move_to_new_position(delta: float) -> void:
 		self.leg_moved.emit()
 
 func _on_move_signal(id: int, offset: Vector2) -> void:
-	print("leg move", id, offset)
 	if id == self.leg_id:
 		self.move_leg(offset)

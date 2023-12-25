@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_wg8ra"]
 radius = 15.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_27hep"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_sycx1"]
 atlas = ExtResource("2_n7by4")
 region = Rect2(0, 48, 16, 16)
 
@@ -20,7 +20,7 @@ shape = SubResource("CircleShape2D_wg8ra")
 [node name="mech_sprite" type="Sprite2D" parent="."]
 texture_filter = 1
 rotation = 1.5708
-texture = SubResource("AtlasTexture_27hep")
+texture = SubResource("AtlasTexture_sycx1")
 
 [node name="leg_1_anchor" type="Node2D" parent="."]
 position = Vector2(3, 3)

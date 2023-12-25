@@ -3,8 +3,6 @@ extends CharacterBody2D
 const SPEED = 200.0
 const JUMP = -444.0
 
-@export var cursor: Node2D
-@export var starting_weapon: PackedScene
 @export var rotation_speed: float = 10.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
